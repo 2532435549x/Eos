@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>表格</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font: italic 20px Georgia, serif;
+            letter-spacing: normal;
+            background-color: #f0f0f0;
+        }
+        #content{
+            width: 100%;
+            padding: 40px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            box-shadow: 0px 0px 16px #aaa;
+        }
+        #table1{
+            font: bold 16px/1.4em "Trebuchet MS", sans-serif;
+        }
+        #table1 thead th{
+            padding: 15px;
+            border: 1px solid #93CE37;
+            border-bottom: 3px solid #9ED929;
+            text-shadow: 1px 1px 1px #568F23;
+            color: #fff;
+            background-color: #9DD929;
+            border-radius: 5px 5px 0px 0px;
+        }
+        #table1 thead th:empty{
+            background-color: transparent;
+            border: none;
+        }
+        #table1 tbody th{
+            padding: 0px 10px;
+            border: 1px solid #93CE37;
+            border-right: 3px solid #9ED929;
+            text-shadow: 1px 1px 1px #568F23;
+            color: #666;
+            background-color: #9DD929;
+            border-radius: 5px 0px 0px 5px;
+        }
+        #table1 tbody td{
+            padding: 10px;
+            border: 2px solid #E7EFE0;
+            text-align: center;
+            text-shadow: 1px 1px 1px #fff;
+            color: #666;
+            background-color: #DEF3CA;
+            border-radius: 2px;
+        }
+        #table1 tfoot td{
+            padding: 10px 0px;
+            font-size: 32px;
+            color: #9CD009;
+            text-align: center;
+            text-shadow: 1px 1px 1px #444;
+        }
+    </style>
+</head>
+<body>
+<form action="/query/" method="post">
+<input type="text" name="查询账户名"/>查询账号<br>
+<input type="submit" name="submit" value="提交"/>
+</form>
+<label for="meeting">{{ dataErrorIonfo.data }}</label>
+<div id="content">
+    <table id="table1">
+        <thead>
+            <a href="/download/"><i data-toggle=tooltip">导出excel</i></a>
+            <tr>
+                <th scope="col" abbr="Starter" style="width:30%;">trx_id</th>
+                <th scope="col" abbr="Deluxe" style="width:5%;">status</th>
+                <th scope="col" abbr="Medium" style="width:9%;">timestamp</th>
+                <th scope="col" abbr="Business" style="width:4%;">receiver</th>
+                <th scope="col" abbr="Deluxe" style="width:4%;">sender</th>
+                <th scope="col" abbr="Deluxe" style="width:4%;">code</th>
+                <th scope="col" abbr="Deluxe" style="width:4%;">quantity</th>
+                <th scope="col" abbr="Deluxe" style="width:4%;">symbol</th>
+                <th scope="col" abbr="Deluxe" style="width:33%;">memo</th>
+            </tr>
+        </thead>
+        {% for line in data %}
+    <tr class="change">
+        <td><a href="https://eospark.com/tx/{{ line.trx_id }}">{{ line.trx_id }}</a></td>
+        <td>{{ line.status }}</td>
+        <td>{{ line.timestamp }}</td>
+        <td>{{ line.receiver }}</td>
+        <td>{{ line.sender }}</td>
+        <td>{{ line.code }}</td>
+        <td>{{ line.quantity }}</td>
+        <td>{{ line.symbol }}</td>
+        <td>{{ line.memo }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+</body>
+</html>
